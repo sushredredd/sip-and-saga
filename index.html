@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sip &amp; Saga — The Indian Cocktail &amp; Mocktail Encyclopedia</title>
+<meta name="description" content="102 cinematic cocktail, mocktail, chai, coffee and shake recipes for the Indian table — with living pours, honest measurements, and the Bartender's Slang translator.">
+<meta property="og:title" content="Sip & Saga — The Indian Cocktail & Mocktail Encyclopedia">
+<meta property="og:description" content="Every pour, a small cinema. 102 drinks from Old Fashioned to Cutting Chai.">
+<meta name="theme-color" content="#150f1d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,430;0,9..144,560;1,9..144,380;1,9..144,480&family=Karla:ital,wght@0,300;0,400;0,500;0,640;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 4h20l-8 12v8h5v4H9v-4h5v-8z' fill='%23E89B4B'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="dust" aria-hidden="true"></canvas>
+
+<header class="site-head" id="top">
+  <a class="brand" href="#top" aria-label="Sip and Saga home">
+    <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path d="M6 4h20l-8 12v8h5v4H9v-4h5v-8z" fill="currentColor"/></svg>
+    <span>Sip <em>&amp;</em> Saga</span>
+  </a>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="#library">Library</a>
+    <a href="#bomb-lab">Bomb Lab</a>
+    <a href="#shelf">Bar Shelf</a>
+  </nav>
+  <label class="slang-toggle" title="Swap ml for the bartender's honest measurements">
+    <input type="checkbox" id="slangToggle" aria-label="Toggle Bartender's Slang measurements">
+    <span class="pill"><span class="knob"></span></span>
+    <span class="slang-label">Bartender's&nbsp;Slang</span>
+  </label>
+</header>
+
+<main>
+<!-- ======================= HERO ======================= -->
+<section class="hero" aria-label="Introduction">
+  <div class="hero-copy">
+    <p class="eyebrow">The Indian drink encyclopedia · 102 recipes</p>
+    <h1>Every pour,<br><em>a small cinema.</em></h1>
+    <p class="lede">From a Bandra Old&nbsp;Fashioned to a platform-side cutting chai — recipes with history, honest measurements, and the occasional <button class="lede-link" id="slangHint" type="button">confident glug</button>.</p>
+    <div class="hero-cta">
+      <a class="btn btn-amber" href="#library">Open the library</a>
+      <a class="btn btn-ghost" href="#bomb-lab">Watch a bomb drop</a>
+    </div>
+    <dl class="hero-facts">
+      <div><dt>102</dt><dd>full recipes</dd></div>
+      <div><dt>0–32%</dt><dd>from chaas to negroni</dd></div>
+      <div><dt>₹20+</dt><dd>starts at a cutting</dd></div>
+    </dl>
+  </div>
+  <div class="hero-stage" aria-hidden="true">
+    <div class="stage-glow"></div>
+    <canvas id="pourCanvas"></canvas>
+    <p class="stage-caption" id="stageCaption">the house pour · on loop</p>
+  </div>
+</section>
+
+<!-- ======================= RIBBON ======================= -->
+<div class="ribbon" aria-hidden="true"><div class="ribbon-track" id="ribbonTrack">
+  <span>Cocktails</span><i>◆</i><span>Mocktails</span><i>◆</i><span>Cutting Chai</span><i>◆</i><span>Bomb Shots</span><i>◆</i><span>Lassi</span><i>◆</i><span>Cold Brew</span><i>◆</i><span>Sherbets</span><i>◆</i><span>Milkshakes</span><i>◆</i><span>Kahwa</span><i>◆</i><span>Sol Kadhi</span><i>◆</i><span>Falooda</span><i>◆</i>
+</div></div>
+
+<!-- ======================= LIBRARY ======================= -->
+<section class="library" id="library">
+  <div class="lib-head">
+    <h2>The Library</h2>
+    <p class="lib-sub">Search by name, ingredient, glass, mood or festival. Filters stack.</p>
+  </div>
+
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <input id="search" type="search" placeholder="Try “kokum”, “saffron”, “copper mug”, “Holi”…" autocomplete="off" aria-label="Search drinks">
+    <button id="clearSearch" type="button" aria-label="Clear search" hidden>×</button>
+  </div>
+
+  <div class="chips" id="catChips" role="group" aria-label="Category filters"></div>
+  <div class="chips chips-taste" id="tasteChips" role="group" aria-label="Taste filters"></div>
+
+  <p class="count" id="count" aria-live="polite"></p>
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>Nothing in the cellar for that — try fewer filters, or search “chai”. There is always chai.</p>
+
+  <!-- Reserved ad slot: paste your Google AdSense unit inside .ad-inner when live -->
+  <aside class="ad-slot" aria-label="Advertisement slot">
+    <div class="ad-inner"><span>Reserved for a tasteful sponsor</span><small>ad slot · 970×120 · AdSense code goes here</small></div>
+  </aside>
+</section>
+
+<!-- ======================= BOMB LAB ======================= -->
+<section class="bomb-lab" id="bomb-lab">
+  <div class="lab-copy">
+    <h2>The Bomb Lab</h2>
+    <p>A shot glass balanced over a cold base, then dropped in slow motion — fizz, foam and settling bubbles, on loop. Pick a detonation:</p>
+    <div class="chips" id="bombChips" role="group" aria-label="Choose a bomb shot"></div>
+    <p class="lab-note" id="bombNote"></p>
+    <button class="btn btn-ghost" id="bombOpen" type="button">Read this recipe →</button>
+  </div>
+  <div class="lab-stage">
+    <canvas id="bombCanvas"></canvas>
+  </div>
+</section>
+
+<!-- ======================= BAR SHELF ======================= -->
+<section class="shelf" id="shelf">
+  <div class="lib-head">
+    <h2>The Bar Shelf</h2>
+    <p class="lib-sub">Tools we actually reach for. Links may earn us a small commission at no extra cost to you — it keeps the lights amber.</p>
+  </div>
+  <div class="shelf-grid" id="shelfGrid"></div>
+  <aside class="ad-slot" aria-label="Sponsored recipe slot">
+    <div class="ad-inner"><span>Sponsored pour — your brand's recipe, told beautifully</span><small>partner slot · write to hello@sipandsaga.in</small></div>
+  </aside>
+</section>
+</main>
+
+<footer class="site-foot">
+  <div>
+    <strong>Sip &amp; Saga</strong>
+    <p>Drink responsibly. Recipes with alcohol are for adults of legal drinking age in their state. Nutrition values are estimates per serving.</p>
+  </div>
+  <p class="foot-fine">Photography via Unsplash (free licence). As an Amazon Associate we may earn from qualifying purchases. © <span id="yr"></span> Sip &amp; Saga.</p>
+</footer>
+
+<!-- Detail overlay is created by script.js -->
+<script src="data.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>
